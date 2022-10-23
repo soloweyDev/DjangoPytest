@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 ">
+        <img src="{{ product.get_image }}" alt="" style="width: 100%; object-fit:cover; border-radius: 1.5rem; max-height: 500px">
+    </div>
+    <div class="col-12 p-5">
+        <h2>Назавание: {{ product.title }}</h2>
+        <p><b>Описание: </b>{{ product.description }}</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'products.order' product.id %}" class="btn btn-success">Заказать</a>
+        {% else %}
+        <p><i>Чтобы заказать товар необходимо <a href="{% url 'users.login' %}">войти</a> в систему</i></p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

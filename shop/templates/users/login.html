@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<h2>Авторизация</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label>Логин</label>
+                <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" name="username">
+                {% for error in form.username.errors %}
+                    <small class="invalid-feedback">{{ error }}</small>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" class="form-control {% if form.username.errors %}is-invalid{% endif %}" name="password">
+                {% for error in form.username.errors %}
+                    <small class="invalid-feedback">{{ error }}</small>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary">Войти</button>
+</form>
+{% endblock %}

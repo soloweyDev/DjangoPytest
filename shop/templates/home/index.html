@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<form class="form-inline" action="{% url 'products.search' %}">
+    {% csrf_token %}
+    <input type="text" class="form-control" style="width: 350px" name="search" placeholder="Поиск">
+    <button class="btn btn-primary ml-3">Искать</button>
+</form>
+<hr>
+<div class="wrap">
+    <h2>Последнии товары</h2>
+    <div class="row mt-4">
+        {% for product in products %}
+        <div class="col-12 col-md-4 mt-3">
+            <div class="card">
+                <img src="{{ product.get_image }}" style="max-height: 250px; object-fit: cover">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <a href="{% url 'products.show' product.id %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

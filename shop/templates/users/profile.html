@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<div class="wrap">
+    <h2>О пользователе</h2>
+    <div class="d-flex">
+        <style>
+            .profile-image{
+                width: 150px;
+                height: 150px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-radius: 50%;
+                filter: grayscale(100%);
+                transition: .3s easy-in-out;
+            }
+            .profile-image:hover{
+                filter: none;
+            }
+        </style>
+        <div class="profile-image" style="background-image: url({{ user.get_image }})"></div>
+        <div class="ml-3 mt-3">
+            <h5>{{ user.username }}</h5>
+            <p><b>Почта: </b> {{ user.email }}</p>
+        </div>
+    </div>
+    <hr>
+    <h2>Заказы</h2>
+    <div class="row mt-4">
+        {% for order in orders %}
+        <div class="col-12 col-md-4 mt-3">
+            <div class="card">
+                <img src="{{ order.product.get_image }}" style="max-height: 250px; object-fit: cover">
+                <div class="card-body">
+                    <h5 class="card-title">{{ order.product.title }}</h5>
+                    <p class="card-text">{{ order.product.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
